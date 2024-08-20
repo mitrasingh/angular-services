@@ -5,7 +5,10 @@ import { Task } from './task.model';
   providedIn: 'root',
 })
 export class TaskService {
-  tasks = signal<Task[]>([]);
+  private tasks = signal<Task[]>([]);
+
+  // to expose data (since tasks is private)
+  allTasks = this.tasks.asReadonly();
 
   addTask(taskData: { title: string; description: string }) {
     const newTask: Task = {
